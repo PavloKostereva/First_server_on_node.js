@@ -1,13 +1,14 @@
-const express = require('express');  
-const app = express();
+// Читання та запис файлів
+// Напишіть скрипт, який читає файл input.txt, додає до його вмісту текст
+// "Hello from Node.js" і записує результат у файл output.txt.
 
-// Оголошення маршруту  
-app.get('/', (req, res) => {  
- res.send('Hello, World!');  
-});
+const fs = require('fs');
+fs.readFile('input.txt', 'utf8', (err, data) => {
 
-// Запуск сервера  
-const PORT = process.env.PORT || 3000;  
-app.listen(PORT, () => {  
- console.log(`Server is running on http://localhost:${PORT}`);  
+    if (err) throw err;
+    const newData = data + '\n Hello from Node.js';
+    fs.writeFile('out_put.txt', newData, (err) => { 
+        if (err) throw err;
+        console.log('File written succesfully'+ newData)
+    })
 });
